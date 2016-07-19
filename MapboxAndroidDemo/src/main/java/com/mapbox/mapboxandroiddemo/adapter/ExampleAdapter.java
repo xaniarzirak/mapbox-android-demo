@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -32,25 +36,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         // create a new view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_description_item, parent, false);
-        View view2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_mas_description_card, parent, false);
 
-        switch (viewType) {
-            case 0: return new ViewHolder(view);
-            case 1: return new ViewHolderDescription(view1);
-            case 2: return new ViewHolderDescription(view2);
-        }
-
-        return new ViewHolder(view);
+            return new ViewHolder(view);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(((MainActivity)mContext).getCurrentCategory() == R.id.nav_lab && position == 0){
-            return 1;
-        }else if(((MainActivity)mContext).getCurrentCategory() == R.id.nav_mas && position == 0){
-            return 2;
-        }
         return 0;
     }
 
@@ -63,12 +54,26 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 String imageUrl = mContext.getString(detailItem.getImageUrl());
 
-                if (!imageUrl.isEmpty()) {
+                /*if (!imageUrl.isEmpty()) {
                     Picasso.with(mContext)
-                            .load(imageUrl)
+                            .load(new File(imageUrl))
                             .into(viewHolder.imageView);
                 } else {
                     viewHolder.imageView.setImageDrawable(null);
+                }*/
+
+                try
+                {
+                    // get input stream
+                    InputStream ims = mContext.getAssets().open(imageUrl);
+                    // load image as Drawable
+                    Drawable d = Drawable.createFromStream(ims, null);
+                    // set image to ImageView
+                    viewHolder.imageView.setImageDrawable(d);
+                }
+                catch(IOException ex)
+                {
+                    return;
                 }
 
                 if(detailItem.getShowNewIcon()){
