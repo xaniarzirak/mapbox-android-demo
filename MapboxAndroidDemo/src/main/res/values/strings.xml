@@ -28,13 +28,16 @@
     <!-- example titles -->
     <string name="activity_basic_polygon_with_line_title">Polygon with boarder</string>
     <string name="activity_basic_circle_marker_title">Circle marker</string>
+    <string name="activity_basic_polyline_polygon_title">Polyline/Polygon Z ordering</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_polygon_with_line_description">Using a polyline you can give a polygon adjustable boarder.</string>
     <string name="activity_basic_circle_marker_description">Use a marker view to show a circle and adjust its size.</string>
+    <string name="activity_basic_polyline_polygon_description">Example showing the default z ordering of annotations.</string>
 
     <!-- example urls-->
     <string name="circle_url">circle_screen.png</string>
     <string name="polygon_url">polygon_screen.png</string>
+    <string name="z_ordering_annotation_url">z_ordering_annotation_screen.png</string>
 
 </resources>

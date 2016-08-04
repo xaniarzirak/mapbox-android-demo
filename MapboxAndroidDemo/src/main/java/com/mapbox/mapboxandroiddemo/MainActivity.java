@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.clear();
         switch (id) {
             case R.id.nav_basics:
-
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_polyline_polygon_title,R.string.activity_basic_polyline_polygon_description, new Intent(MainActivity.this, PolylinePolygonOrderingActivity.class), R.string.z_ordering_annotation_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_polygon_with_line_title,R.string.activity_basic_polygon_with_line_description, new Intent(MainActivity.this, PolygonWithLineActivity.class), R.string.polygon_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_circle_marker_title, R.string.activity_basic_circle_marker_description, new Intent(MainActivity.this, CircleMarkerActivity.class), R.string.circle_url));
                 currentCategory = R.id.nav_basics;

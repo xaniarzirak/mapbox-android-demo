@@ -76,12 +76,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     return;
                 }
 
-                if(detailItem.getShowNewIcon()){
-                    viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.new_icon));
-                }else{
-                    viewHolder.newIconImageView.setImageDrawable(null);
-                }
-
                 viewHolder.titleTextView.setText(mContext.getString(detailItem.getTitle()));
                 viewHolder.descriptionTextView.setText(mContext.getString(detailItem.getDescription()));
         }

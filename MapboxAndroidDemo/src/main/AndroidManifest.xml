@@ -40,6 +40,14 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity
+            android:name=".PolylinePolygonOrderingActivity"
+            android:label="@string/activity_basic_polyline_polygon_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
     </application>
 </manifest>
