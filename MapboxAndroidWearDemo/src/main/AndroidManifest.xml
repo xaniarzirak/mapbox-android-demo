@@ -57,6 +57,14 @@
                 android:value=".MainActivity"/>
         </activity>
 
+        <activity
+            android:name=".examples.UserLocationActivity"
+            android:label="@string/activity_user_location_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
         <service android:name="com.mapbox.services.android.telemetry.service.TelemetryService"/>
 
     </application>
