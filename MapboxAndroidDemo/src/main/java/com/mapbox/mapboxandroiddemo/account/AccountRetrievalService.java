@@ -13,27 +13,22 @@ import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
- * Background service which retrieves Mapbox Account information
+ * Background service which retrieves Mapbox account information
  */
 
 public class AccountRetrievalService extends IntentService {
 
   private static final String BASE_URL = "https://api.mapbox.com/api/";
-  private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
+  private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token/";
 
-  //  TODO: Fill in CLIENT_SECRET and before running app. Never commit changes to Github with CLIENT_SECRET filled in!
+  //  TODO: Add CLIENT_SECRET before running app. For now, NEVER commit changes to Github with CLIENT_SECRET!
   private static final String CLIENT_SECRET = "";
 
   private String clientId;
@@ -62,28 +57,22 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getAccessToken(String code) {
-    OkHttpClient client = new OkHttpClient();
-
-    Request request = new Request.Builder()
-      .addHeader("User-Agent", "Android Dev Preview")
-      .addHeader("Content-Type", "application/x-www-form-urlencoded")
-      .url(ACCESS_TOKEN_URL)
-      .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + CLIENT_SECRET
-          + "&redirect_uri=" + redirectUri + "&code=" + code))
+    Retrofit retrofit = new Retrofit.Builder()
+      .baseUrl(ACCESS_TOKEN_URL)
+      .addConverterFactory(GsonConverterFactory.create())
       .build();
+    MapboxAccountRetrofitService service = retrofit.create(MapboxAccountRetrofitService.class);
+    retrofit2.Call<Object> requestRequest = service.getAccessToken("Android Dev Preview",
+      clientId, CLIENT_SECRET, redirectUri, code);
 
-    client.newCall(request).enqueue(new okhttp3.Callback() {
+    requestRequest.enqueue(new retrofit2.Callback<Object>() {
       @Override
-      public void onFailure(okhttp3.Call call, IOException exception) {
-
-      }
-
-      @Override
-      public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-
-        String json = response.body().string();
-
+      public void onResponse(retrofit2.Call<Object> call, retrofit2.Response<Object> response) {
+        Log.d("RetrievalService", "onResponse: response received");
+        String json = response.toString();
+        String jsonString = response.raw().body().toString();
+        Log.d("RetrievalService", "onResponse: json = " + json);
+        Log.d("RetrievalService", "onResponse: jsonString = " + jsonString);
         JSONObject data = null;
         try {
           data = new JSONObject(json);
@@ -98,26 +87,26 @@ public class AccountRetrievalService extends IntentService {
           exception.printStackTrace();
         }
       }
+
+      @Override
+      public void onFailure(retrofit2.Call<Object> call, Throwable throwable) {
+        throwable.printStackTrace();
+      }
     });
   }
 
   private void getUsernameFromJwt(String jwtEncoded) throws Exception {
-
     try {
       String[] split = jwtEncoded.split("\\.");
       String jwtBody = getJson(split[1]);
-
       username = jwtBody.substring(6, jwtBody.length() - 34);
-
     } catch (UnsupportedEncodingException exception) {
       //Error
       exception.printStackTrace();
-
     }
   }
 
   private void getUserInfo(final String userName, final String token) {
-
     Retrofit retrofit = new Retrofit.Builder()
       .baseUrl(BASE_URL)
       .addConverterFactory(GsonConverterFactory.create())
@@ -130,8 +119,11 @@ public class AccountRetrievalService extends IntentService {
       public void onResponse(retrofit2.Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
 
         String userId = response.body().getId();
+        Log.d("RetrievalService", "onResponse: userId = " + userId);
         String emailAddress = response.body().getId();
+        Log.d("RetrievalService", "onResponse: emailAddress = " + emailAddress);
         String avatarUrl = response.body().getId();
+        Log.d("RetrievalService", "onResponse: avatarUrl = " + avatarUrl);
 
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
 
