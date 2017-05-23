@@ -57,12 +57,12 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getAccessToken(String code) {
-    Retrofit retrofit = new Retrofit.Builder()
+    Retrofit retrofitBuilder = new Retrofit.Builder()
       .baseUrl(ACCESS_TOKEN_URL)
       .addConverterFactory(GsonConverterFactory.create())
       .build();
-    MapboxAccountRetrofitService service = retrofit.create(MapboxAccountRetrofitService.class);
-    retrofit2.Call<Object> requestRequest = service.getAccessToken("Android Dev Preview",
+    MapboxAccountRetrofitService service = retrofitBuilder.create(MapboxAccountRetrofitService.class);
+    retrofit2.Call<Object> requestRequest = service.getAccessToken(
       clientId, CLIENT_SECRET, redirectUri, code);
 
     requestRequest.enqueue(new retrofit2.Callback<Object>() {
