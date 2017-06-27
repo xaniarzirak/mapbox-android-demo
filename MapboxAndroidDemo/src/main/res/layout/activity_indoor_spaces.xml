@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraBearing="324.487"
+        mapbox:mapbox_cameraTargetLat="42.276655"
+        mapbox:mapbox_cameraTargetLng="-83.737649"
+        mapbox:mapbox_cameraTilt="39.78"
+        mapbox:mapbox_cameraZoom="14.90"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+
+    <Spinner
+        android:id="@+id/extrusions_indoor_room_spinner_menu"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/mapboxGrayLight"
+        android:textAlignment="center">
+    </Spinner>
+
+</FrameLayout>

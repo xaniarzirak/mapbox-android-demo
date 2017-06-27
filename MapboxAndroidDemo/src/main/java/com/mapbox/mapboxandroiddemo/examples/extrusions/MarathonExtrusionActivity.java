@@ -81,4 +81,51 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
       return null;
     }
   }
+
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+
+
+
 }

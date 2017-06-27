@@ -48,6 +48,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivi
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.BasicExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.IndoorSpacesActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
@@ -317,28 +318,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_basic_extrusions_title,
-          R.string.activity_style_basic_extrusions_description,
+          R.string.activity_extrusions_basic_extrusions_title,
+          R.string.activity_extrusions_basic_extrusions_description,
           new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_style_basic_extrusions_url, true
+          R.string.activity_extrusions_basic_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_population_density_extrusions_title,
-          R.string.activity_style_population_density_extrusions_description,
+          R.string.activity_extrusions_population_density_extrusions_title,
+          R.string.activity_extrusions_population_density_extrusions_description,
           new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
-          R.string.activity_style_population_density_extrusions_url, true
+          R.string.activity_extrusions_population_density_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_catalina_marathon_extrusions_title,
-          R.string.activity_style_catalina_marathon_extrusions_description,
+          R.string.activity_extrusions_catalina_marathon_extrusions_title,
+          R.string.activity_extrusions_catalina_marathon_extrusions_description,
           new Intent(MainActivity.this, MarathonExtrusionActivity.class),
-          R.string.activity_style_catalina_marathon_extrusions_url, true
+          R.string.activity_extrusions_catalina_marathon_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_adjust_extrusions_title,
-          R.string.activity_style_adjust_extrusions_description,
+          R.string.activity_extrusions_adjust_extrusions_title,
+          R.string.activity_extrusions_adjust_extrusions_description,
           new Intent(MainActivity.this, AdjustExtrusionLightActivity.class),
-          R.string.activity_style_adjust_extrusions_url, true
+          R.string.activity_extrusions_adjust_extrusions_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_extrusions_indoor_spaces_title,
+          R.string.activity_extrusions_indoor_spaces_description,
+          new Intent(MainActivity.this, IndoorSpacesActivity.class),
+          R.string.activity_extrusions_indoor_spaces_url
         ));
         currentCategory = R.id.nav_extrusions;
         break;
