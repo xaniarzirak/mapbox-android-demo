@@ -108,7 +108,7 @@ public class IndoorSpacesActivity extends AppCompatActivity implements AdapterVi
         );
         mapboxMap.addLayer(roomLayer);
 
-        setUpSpinner();
+        setUpSpinnerDropdownMenu();
       }
     });
   }
@@ -235,7 +235,7 @@ public class IndoorSpacesActivity extends AppCompatActivity implements AdapterVi
     colorStrings[35] = "#4EB091";
   }
 
-  private void setUpSpinner() {
+  private void setUpSpinnerDropdownMenu() {
     Spinner spinner = (Spinner) findViewById(R.id.extrusions_indoor_room_spinner_menu);
     // Create an ArrayAdapter using the string array and a default spinner layout
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
