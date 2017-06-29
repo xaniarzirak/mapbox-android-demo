@@ -15,7 +15,9 @@ import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.services.commons.geojson.FeatureCollection;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.property;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
@@ -53,11 +55,7 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
       public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (earthquakeCircles != null) {
           earthquakeCircles.setProperties(
-
           );
-
-
-
         }
 
 
@@ -83,7 +81,7 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        GeoJsonSource earthquakeSource = new GeoJsonSource("earthquakeSource", "https://www.mapbox.com/mapbox-gl-js/assets/data/significant-earthquakes-2015.geojson");
+        GeoJsonSource earthquakeSource = new GeoJsonSource("earthquakeSource", loadJsonFromAsset("significant-earthquakes-2015.geojson"));
         map.addSource(earthquakeSource);
 
         CircleLayer earthquakeLayer = new CircleLayer("earthquakeLayer", "earthquakeSource");
@@ -160,4 +158,23 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
+
+  private String loadJsonFromAsset(String filename) {
+    // Using this method to load in GeoJSON files from the assets folder.
+
+    try {
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer, "UTF-8");
+
+    } catch (IOException ex) {
+      ex.printStackTrace();
+      return null;
+    }
+  }
+
+
 }
