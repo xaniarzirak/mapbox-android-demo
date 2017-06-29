@@ -14,11 +14,17 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.property;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
@@ -35,6 +41,7 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
   private Layer earthquakeCircles;
   private String[] months = {"January", "February", "March", "April", "May",
     "June", "July", "August", "September", "October", "November", "December"};
+  private String monthToShow;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +57,79 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
     final SeekBar monthAdjuster = (SeekBar) findViewById(R.id.seek_bar_month_adjuster);
     final TextView monthOfYearTextView = (TextView) findViewById(R.id.textview_month_of_year);
 
-
-    int x = 3;
-    String monthToShow = months[x];
+    monthAdjuster.setProgress(0);
+    monthToShow = months[0];
     monthOfYearTextView.setText(monthToShow);
 
     monthAdjuster.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
       public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        if (earthquakeCircles != null) {
-          earthquakeCircles.setProperties(
-          );
 
+        Log.d("EarthSlider", "onProgressChanged: progress = " + progress);
+
+        double singleMonth = 100 / 12;
+
+        if (progress <= singleMonth) {
+          monthToShow = months[0];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth && progress < singleMonth * 2) {
+          monthToShow = months[1];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 2 && progress < singleMonth * 3) {
+          monthToShow = months[2];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 3 && progress < singleMonth * 4) {
+          monthToShow = months[3];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 4 && progress < singleMonth * 5) {
+          monthToShow = months[4];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 5 && progress < singleMonth * 6) {
+          monthToShow = months[5];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 6 && progress < singleMonth * 7) {
+          monthToShow = months[6];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 7 && progress < singleMonth * 8) {
+          monthToShow = months[7];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 8 && progress < singleMonth * 9) {
+          monthToShow = months[8];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 9 && progress < singleMonth * 10) {
+          monthToShow = months[9];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 10 && progress < singleMonth * 11) {
+          monthToShow = months[10];
+          monthOfYearTextView.setText(monthToShow);
+
+
+        } else if (progress > singleMonth * 11 && progress < singleMonth * 12) {
+          monthToShow = months[11];
+
+
+          monthOfYearTextView.setText(monthToShow);
         }
-
-        int x = 3;
-        String monthToShow = months[x];
-        Log.d("earthsliderActivity", "onProgressChanged: progress = " + progress);
-        monthOfYearTextView.setText(monthToShow);
-
       }
 
       @Override
@@ -92,6 +153,32 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
 
         GeoJsonSource earthquakeSource = new GeoJsonSource("earthquakeSource", loadJsonFromAsset("significant-earthquakes-2015.geojson"));
         map.addSource(earthquakeSource);
+
+        JSONArray earthquakeArray;
+        StringBuilder sb = new StringBuilder();
+
+        try {
+          earthquakeArray = new JSONArray(sb.toString());
+        } catch (JSONException exception) {
+          throw new RuntimeException(exception);
+        }
+
+        for (int x = 0; x < earthquakeArray.length(); x++) {
+          try {
+            JSONObject singleEarthquake = earthquakeArray.getJSONObject(x);
+            Log.d("earthslider", "onMapReady: singleEarthquake place =" + singleEarthquake.getString("place"));
+
+            long time = singleEarthquake.getLong("time");
+            Log.d("earthslider", "onMapReady: singleEarthquake time =" + singleEarthquake.getLong("time"));
+
+            Date date = new Date(time);
+            Log.d("earthslider", "onMapReady: date =" + date);
+
+
+          } catch (JSONException exception) {
+            throw new RuntimeException(exception);
+          }
+        }
 
         CircleLayer earthquakeLayer = new CircleLayer("earthquakeLayer", "earthquakeSource");
         earthquakeLayer.setProperties(

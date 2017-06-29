@@ -14,7 +14,7 @@
         mapbox:mapbox_cameraTargetLng="20.7927"
         mapbox:mapbox_cameraZoom=".5"
         mapbox:mapbox_cameraZoomMin=".5"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/slider_cardview"
@@ -46,7 +46,7 @@
 
             <TextView
                 android:id="@+id/textview_month_of_year"
-                android:layout_width="45dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
 
