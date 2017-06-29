@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -35,7 +36,6 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
   private String[] months = {"January", "February", "March", "April", "May",
     "June", "July", "August", "September", "October", "November", "December"};
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -50,16 +50,25 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
     final SeekBar monthAdjuster = (SeekBar) findViewById(R.id.seek_bar_month_adjuster);
     final TextView monthOfYearTextView = (TextView) findViewById(R.id.textview_month_of_year);
 
+
+    int x = 3;
+    String monthToShow = months[x];
+    monthOfYearTextView.setText(monthToShow);
+
     monthAdjuster.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
       public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (earthquakeCircles != null) {
           earthquakeCircles.setProperties(
           );
+
         }
 
+        int x = 3;
+        String monthToShow = months[x];
+        Log.d("earthsliderActivity", "onProgressChanged: progress = " + progress);
+        monthOfYearTextView.setText(monthToShow);
 
-//        monthOfYearTextView.setText(progressPrecentage);
       }
 
       @Override
@@ -175,6 +184,4 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
       return null;
     }
   }
-
-
 }
