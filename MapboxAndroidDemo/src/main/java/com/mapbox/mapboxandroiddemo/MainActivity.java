@@ -45,6 +45,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.EarthquakeSliderActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
@@ -604,6 +605,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_json_vector_mix_description,
           new Intent(MainActivity.this, ChoroplethJsonVectorMixActivity.class),
           R.string.activity_dds_json_vector_mix_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_earthquake_slider_title,
+          R.string.activity_dds_earthquake_time__description,
+          new Intent(MainActivity.this, EarthquakeSliderActivity.class),
+          R.string.activity_dds_earthquake_time_url,
           true
         ));
         currentCategory = R.id.nav_dds;
