@@ -47,9 +47,7 @@ public class AddImageActivity extends AppCompatActivity {
 
         // Add a source with a geojson point
         Point point = Point.fromCoordinates(Position.fromCoordinates(41.874, -75.789));
-        GeoJsonSource source = new GeoJsonSource(
-          "point",
-          FeatureCollection.fromFeatures(new Feature[] {Feature.fromGeometry(point)})
+        GeoJsonSource source = new GeoJsonSource("point", FeatureCollection.fromFeatures(new Feature[] {Feature.fromGeometry(point)})
         );
         mapboxMap.addSource(source);
 
