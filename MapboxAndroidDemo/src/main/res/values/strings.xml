@@ -49,6 +49,7 @@
     <string name="activity_basic_mapbox_options_title">Dynamically build a map view</string>
     <string name="activity_style_mapbox_studio_title">Mapbox Studio style</string>
     <string name="activity_style_raster_title">Custom raster style</string>
+    <string name="activity_style_add_image_title">Add a static image</string>
     <string name="activity_style_default_title">Default styles</string>
     <string name="activity_styles_show_hide_layer_title">Show and hide layers</string>
     <string name="activity_styles_langauge_switch_title">"Change a map's language"</string>
@@ -110,6 +111,7 @@
     <string name="activity_basic_mapbox_options_description">Add a mapview in a dynamically created layout.</string>
     <string name="activity_style_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
     <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
+    <string name="activity_style_add_image_description">Add a static image to your map</string>
     <string name="activity_style_default_description">Use a variety of professionally designed styles with the Mapbox Android SDK.</string>
     <string name="activity_styles_show_hide_layer_description">Create a custom layer switcher to display different datasets.</string>
     <string name="activity_styles_langauge_switch_description">Switch the maps language dynamically</string>
@@ -173,6 +175,7 @@
     <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
     <string name="activity_style_mapbox_studio_url" translatable="false">http://i.imgur.com/MbR2zbD.png</string>
     <string name="activity_style_raster_url" translatable="false">http://i.imgur.com/QpFmrdR.png</string>
+    <string name="activity_style_add_image_url" translatable="false">http://i.imgur.com/KFV9z4B.png</string>
     <string name="activity_style_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
     <string name="activity_style_zoom_dependent_fill_color_url" translatable="false">http://i.imgur.com/rHl1pmC.png</string>
     <string name="activity_styles_color_switcher_url" translatable="false">http://i.imgur.com/a0ZaKHG.png</string>

@@ -66,6 +66,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.AddImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
@@ -313,6 +314,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_raster_description,
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_add_image_title,
+          R.string.activity_style_add_image_description,
+          new Intent(MainActivity.this, AddImageActivity.class),
+          R.string.activity_style_add_image_url
         ));
         currentCategory = R.id.nav_styles;
         break;

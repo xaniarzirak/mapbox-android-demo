@@ -55,6 +55,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".examples.styles.AddImageActivity"
+            android:label="@string/activity_style_add_image_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.annotations.DrawMarkerActivity"
             android:label="@string/activity_annotation_marker_title">
             <meta-data
