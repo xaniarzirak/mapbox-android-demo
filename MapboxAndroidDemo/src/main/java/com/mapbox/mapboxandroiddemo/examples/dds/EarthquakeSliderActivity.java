@@ -14,7 +14,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -36,11 +35,11 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 
 public class EarthquakeSliderActivity extends AppCompatActivity {
 
-  private MapboxMap map;
+  private MapboxMap mapboxMap;
   private MapView mapView;
   private Layer earthquakeCircles;
   private String[] months = {"January", "February", "March", "April", "May",
-    "June", "July", "August", "September", "October", "November", "December"};
+      "June", "July", "August", "September", "October", "November", "December"};
   private String monthToShow;
 
   @Override
@@ -64,8 +63,6 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
     monthAdjuster.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
       public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-        Log.d("EarthSlider", "onProgressChanged: progress = " + progress);
 
         double singleMonth = 100 / 12;
 
@@ -149,10 +146,12 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        map = mapboxMap;
+        EarthquakeSliderActivity.this.mapboxMap = mapboxMap;
 
-        GeoJsonSource earthquakeSource = new GeoJsonSource("earthquakeSource", loadJsonFromAsset("significant-earthquakes-2015.geojson"));
-        map.addSource(earthquakeSource);
+        // Create GeoJsonSource and add to map
+        GeoJsonSource earthquakeSource = new GeoJsonSource("earthquakeSource",
+            loadJsonFromAsset("significant-earthquakes-2015.geojson"));
+        mapboxMap.addSource(earthquakeSource);
 
         JSONArray earthquakeArray;
         StringBuilder sb = new StringBuilder();
@@ -180,34 +179,35 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
           }
         }
 
+        // Create CircleLayer with GeoJson data and then add it to the map
         CircleLayer earthquakeLayer = new CircleLayer("earthquakeLayer", "earthquakeSource");
         earthquakeLayer.setProperties(
-          circleColor(
-            property("mag", categorical(
-              stop(6, circleColor(Color.parseColor("#FCA107"))),
-              stop(8, circleColor(Color.parseColor("#7F3121")))
-              )
-            )
-          ),
-          circleRadius(
-            property("mag", categorical(
-              stop(6, circleRadius(20f)),
-              stop(8, circleRadius(40f))
-              )
-            )
-          ),
-          circleOpacity(0.75f)
+            circleColor(
+                property("mag", categorical(
+                    stop(6, circleColor(Color.parseColor("#FCA107"))),
+                    stop(8, circleColor(Color.parseColor("#7F3121")))
+                    )
+                )
+            ),
+            circleRadius(
+                property("mag", categorical(
+                    stop(6, circleRadius(20f)),
+                    stop(8, circleRadius(40f))
+                    )
+                )
+            ),
+            circleOpacity(0.75f)
         );
-        map.addLayer(earthquakeLayer);
+        mapboxMap.addLayer(earthquakeLayer);
 
+        // Create and then add SymbolLayer to the map
         SymbolLayer earthquakeLabels = new SymbolLayer("earthquake-labels", "earthquakeSource");
         earthquakeLabels.withProperties(
-          textColor("rgba(0,0,0,0.5)")
+            textColor("rgba(0,0,0,0.5)")
         );
+        mapboxMap.addLayer(earthquakeLabels);
 
-        map.addLayer(earthquakeLabels);
-
-        earthquakeCircles = map.getLayer("earthquakeLayer");
+        earthquakeCircles = mapboxMap.getLayer("earthquakeLayer");
       }
     });
   }
@@ -257,7 +257,6 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
 
   private String loadJsonFromAsset(String filename) {
     // Using this method to load in GeoJSON files from the assets folder.
-
     try {
       InputStream is = getAssets().open(filename);
       int size = is.available();
