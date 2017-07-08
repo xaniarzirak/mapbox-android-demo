@@ -28,6 +28,7 @@ import java.util.Date;
 import static com.mapbox.mapboxsdk.style.functions.Function.property;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
+import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -41,6 +42,8 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
   private String[] months = {"January", "February", "March", "April", "May",
       "June", "July", "August", "September", "October", "November", "December"};
   private String monthToShow;
+  private String earthquakeGeoJsonSourceId = "earthquakeSource";
+  private int progressFilter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +59,11 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
     final SeekBar monthAdjuster = (SeekBar) findViewById(R.id.seek_bar_month_adjuster);
     final TextView monthOfYearTextView = (TextView) findViewById(R.id.textview_month_of_year);
 
+    progressFilter = 0;
     monthAdjuster.setProgress(0);
     monthToShow = months[0];
     monthOfYearTextView.setText(monthToShow);
+
 
     monthAdjuster.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
@@ -149,7 +154,7 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
         EarthquakeSliderActivity.this.mapboxMap = mapboxMap;
 
         // Create GeoJsonSource and add to map
-        GeoJsonSource earthquakeSource = new GeoJsonSource("earthquakeSource",
+        GeoJsonSource earthquakeSource = new GeoJsonSource(earthquakeGeoJsonSourceId,
             loadJsonFromAsset("significant-earthquakes-2015.geojson"));
         mapboxMap.addSource(earthquakeSource);
 
@@ -180,7 +185,7 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
         }
 
         // Create CircleLayer with GeoJson data and then add it to the map
-        CircleLayer earthquakeLayer = new CircleLayer("earthquakeLayer", "earthquakeSource");
+        CircleLayer earthquakeLayer = new CircleLayer("earthquakeLayer", earthquakeGeoJsonSourceId);
         earthquakeLayer.setProperties(
             circleColor(
                 property("mag", categorical(
@@ -198,16 +203,18 @@ public class EarthquakeSliderActivity extends AppCompatActivity {
             ),
             circleOpacity(0.75f)
         );
+        earthquakeLayer.setFilter(
+            eq("cluster", progressFilter)
+        );
         mapboxMap.addLayer(earthquakeLayer);
 
         // Create and then add SymbolLayer to the map
-        SymbolLayer earthquakeLabels = new SymbolLayer("earthquake-labels", "earthquakeSource");
+        SymbolLayer earthquakeLabels = new SymbolLayer("earthquake-labels", earthquakeGeoJsonSourceId);
         earthquakeLabels.withProperties(
-            textColor("rgba(0,0,0,0.5)")
+            textColor(Color.WHITE)
         );
         mapboxMap.addLayer(earthquakeLabels);
 
-        earthquakeCircles = mapboxMap.getLayer("earthquakeLayer");
       }
     });
   }
