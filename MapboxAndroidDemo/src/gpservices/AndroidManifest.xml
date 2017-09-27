@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <uses-feature android:name="android.hardware.location.gps"/>
 
@@ -14,12 +15,13 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
@@ -42,14 +44,6 @@
         <activity
             android:name=".examples.styles.MapboxStudioStyleActivity"
             android:label="@string/activity_style_mapbox_studio_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.styles.CustomRasterStyleActivity"
-            android:label="@string/activity_style_raster_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -163,22 +157,6 @@
         </activity>
 
         <activity
-            android:name=".examples.location.BasicUserLocation"
-            android:label="@string/activity_location_basic_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.LocationTrackingActivity"
-            android:label="@string/activity_location_tracking_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
             android:name=".labs.LocationPickerActivity"
             android:label="@string/activity_lab_location_picker_title">
             <meta-data
@@ -253,7 +231,7 @@
 
         <activity
             android:name=".examples.styles.LanguageSwitchActivity"
-            android:label="@string/activity_styles_langauge_switch_title">
+            android:label="@string/activity_styles_language_switch_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -299,21 +277,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
 
-        <activity
-            android:name=".examples.location.AnimatedLocationIconActivity"
-            android:label="@string/activity_location_animated_icon_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.CustomizeUserLocationActivity"
-            android:label="@string/activity_location_customize_user_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
 
         <activity
             android:name=".examples.query.QueryFeatureActivity"
@@ -342,14 +305,6 @@
         <activity
             android:name=".examples.query.FeatureCountActivity"
             android:label="@string/activity_query_feature_count_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".labs.OffRouteActivity"
-            android:label="@string/activity_lab_off_route_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -412,6 +367,14 @@
         </activity>
 
         <activity
+            android:name=".examples.dds.AddRainFallStyleActivity"
+            android:label="@string/activity_dds_time_lapse_rainfall_points_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+
+        <activity
             android:name=".examples.camera.RestrictCameraActivity"
             android:label="@string/activity_camera_restrict_title">
             <meta-data
@@ -436,6 +399,15 @@
                     android:host="authorize"
                     android:scheme="mapbox-android-dev-preview"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".labs.MapillaryActivity"
+            android:label="@string/activity_labs_mapillary_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
 
     </application>
