@@ -29,6 +29,7 @@
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
     <string name="activity_extrusions_indoor_3d_url" translatable="false">http://i.imgur.com/1at7cMf.png</string>
     <string name="activity_extrusions_rotate_extrusions_url" translatable="false">http://i.imgur.com/OzcCsB2.png</string>
+    <string name="activity_extrusions_indoor_spaces_url" translatable="false">https://i.imgur.com/NZMIxQk.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
@@ -56,7 +57,7 @@
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
     <string name="activity_mas_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
-    <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
+    <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/fHRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
     <string name="activity_mas_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
