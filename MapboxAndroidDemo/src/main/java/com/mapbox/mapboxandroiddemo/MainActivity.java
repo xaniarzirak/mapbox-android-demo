@@ -385,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_geojson_plugin_title,
           R.string.activity_plugins_geojson_plugin_description,
           new Intent(MainActivity.this, GeoJsonPluginActivity.class),
-          R.string.activity_plugins_geojson_plugin_url, true
+          R.string.activity_plugins_geojson_plugin_url, false
         ));
         currentCategory = R.id.nav_plugins;
         break;
@@ -589,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.activity_lab_picture_in_picture_title,
             R.string.activity_lab_picture_in_picture_description,
             new Intent(MainActivity.this, PictureInPictureActivity.class),
-            R.string.activity_lab_picture_in_picture_url, true
+            R.string.activity_lab_picture_in_picture_url, false
           ));
         }
         exampleItemModel.add(new ExampleItemModel(
@@ -643,7 +643,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.activity_dds_multiple_geometries_title,
             R.string.activity_dds_multiple_geometries_description,
             new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-            R.string.activity_dds_multiple_geometries_url, true
+            R.string.activity_dds_multiple_geometries_url, false
         ));
         currentCategory = R.id.nav_dds;
         break;
