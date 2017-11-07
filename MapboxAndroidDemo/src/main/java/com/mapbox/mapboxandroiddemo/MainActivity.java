@@ -72,6 +72,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
+import com.mapbox.mapboxandroiddemo.examples.snapshot.SimpleSnapshotActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
@@ -666,6 +667,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.activity_dds_multiple_geometries_url, true
         ));
         currentCategory = R.id.nav_dds;
+        break;
+      case R.id.nav_snapshot:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_snapshot_simple_snapshot_title,
+          R.string.activity_snapshot_simple_snapshot_description,
+          new Intent(MainActivity.this, SimpleSnapshotActivity.class),
+          R.string.activity_basic_simple_mapview_url
+        ));
         break;
       default:
         exampleItemModel.add(new ExampleItemModel(
