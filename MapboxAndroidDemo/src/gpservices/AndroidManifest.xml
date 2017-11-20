@@ -336,7 +336,7 @@
 
         <activity
             android:name=".labs.SimpleSnapshotActivity"
-            android:label="@string/activity_snapshot_simple_snapshot_title">
+            android:label="@string/activity_lab_simple_snapshot_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
