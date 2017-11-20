@@ -72,7 +72,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
-import com.mapbox.mapboxandroiddemo.examples.snapshot.SimpleSnapshotActivity;
+import com.mapbox.mapboxandroiddemo.labs.SimpleSnapshotActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;

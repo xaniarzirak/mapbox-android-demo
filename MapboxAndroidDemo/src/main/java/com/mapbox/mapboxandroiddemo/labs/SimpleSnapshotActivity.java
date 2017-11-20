@@ -1,8 +1,7 @@
-package com.mapbox.mapboxandroiddemo.examples.snapshot;
+package com.mapbox.mapboxandroiddemo.labs;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;

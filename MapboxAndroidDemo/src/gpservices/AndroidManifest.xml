@@ -335,7 +335,7 @@
         </activity>
 
         <activity
-            android:name=".examples.snapshot.SimpleSnapshotActivity"
+            android:name=".labs.SimpleSnapshotActivity"
             android:label="@string/activity_snapshot_simple_snapshot_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
