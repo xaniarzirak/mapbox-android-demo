@@ -619,6 +619,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
           R.string.activity_lab_rv_symbol_layer_on_map_url, true
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_simple_snapshot_title,
+          R.string.activity_lab_snapshot_description,
+          new Intent(MainActivity.this, SimpleSnapshotActivity.class),
+          R.string.activity_basic_simple_mapview_url
+        ));
         currentCategory = R.id.nav_lab;
         break;
       case R.id.nav_dds:
@@ -667,14 +673,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.activity_dds_multiple_geometries_url, true
         ));
         currentCategory = R.id.nav_dds;
-        break;
-      case R.id.nav_snapshot:
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_snapshot_simple_snapshot_title,
-          R.string.activity_snapshot_simple_snapshot_description,
-          new Intent(MainActivity.this, SimpleSnapshotActivity.class),
-          R.string.activity_basic_simple_mapview_url
-        ));
         break;
       default:
         exampleItemModel.add(new ExampleItemModel(

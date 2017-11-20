@@ -36,9 +36,6 @@
             android:title="@string/android_services_category"/>
 
         <item
-            android:id="@+id/nav_snapshot"
-            android:title="@string/snapshort_category"/>
-        <item
             android:id="@+id/nav_lab"
             android:title="@string/lab_category"/>
     </group>
