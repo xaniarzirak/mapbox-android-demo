@@ -66,6 +66,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.OfflinePluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -419,7 +420,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_localization_plugin_title,
           R.string.activity_plugins_localization_plugin_description,
           new Intent(MainActivity.this, LocalizationPluginActivity.class),
-          R.string.activity_plugins_localization_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_plugins_localization_plugin_url, true, BuildConfig.MIN_SDK_VERSION));
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_plugins_offline_title,
+          R.string.activity_plugins_offline_description,
+          new Intent(MainActivity.this, OfflinePluginActivity.class),
+          R.string.activity_plugins_offline_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
         );
         currentCategory = R.id.nav_plugins;
         break;
