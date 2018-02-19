@@ -94,6 +94,7 @@ import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
+import com.mapbox.mapboxandroiddemo.labs.MapviewInRecyclerViewActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
@@ -642,6 +643,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_gif_on_map_description,
           new Intent(MainActivity.this, AnimatedImageSourceActivity.class),
           R.string.activity_labs_gif_on_map_url, true, BuildConfig.MIN_SDK_VERSION
+        ));
+
+        exampleItemModels.add(new ExampleItemModel(
+            R.string.activity_labs_rv_map_items_title,
+            R.string.activity_labs_rv_map_items_description,
+            new Intent(MainActivity.this, MapviewInRecyclerViewActivity.class),
+            R.string.activity_labs_rv_map_items_url, true, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_lab;
         break;
