@@ -44,7 +44,7 @@ dependencies {
 
     compileOnly wearDependencies.googleWearable
     implementation wearDependencies.supportGoogleWearable
-
+    implementation wearDependencies.wearableUi
     implementation wearDependencies.gpsWearable
     implementation wearDependencies.gpsLocation
 
@@ -54,7 +54,6 @@ dependencies {
     // Firebase
     implementation dependenciesList.firebaseCrash
     implementation dependenciesList.firebasePerf
-
     implementation project(':SharedCode')
 }
 
