@@ -86,6 +86,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.AnimatedImageSourceActivity;
@@ -347,6 +348,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_image_source_description,
           new Intent(MainActivity.this, ImageSourceActivity.class),
           R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_styles_fade_switch_title,
+          R.string.activity_styles_fade_switch_description,
+          new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
+          R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_styles;
         break;
