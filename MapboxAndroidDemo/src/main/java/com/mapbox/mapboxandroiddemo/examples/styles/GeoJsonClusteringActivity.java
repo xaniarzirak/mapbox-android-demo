@@ -31,6 +31,7 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -154,50 +155,35 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         Bitmap green_circle = BitmapFactory.decodeResource(
                 GeoJsonClusteringActivity.this.getResources(), R.drawable.circle);
 
+        Bitmap yellow_rectangle = BitmapFactory.decodeResource(
+                GeoJsonClusteringActivity.this.getResources(), R.drawable.rectangle);
+
         mapboxMap.addImage("blue_star", blue_star);
         mapboxMap.addImage("green_circle", green_circle);
         mapboxMap.addImage("red_polygon", red_polygon);
+        mapboxMap.addImage("yellow_rectangle", yellow_rectangle);
 
-        int[][] layers = new int[][]{
-                new int[]{150},
-                new int[]{20},
-                new int[]{0}
-        };
-
-        String[] images = new String[]{
-                "blue_star",
-                "green_circle",
-                "red_polygon"
-        };
-
-        //Creating a marker layer for single data points
+        // Create a marker layer for single data points
         SymbolLayer unclustered = new SymbolLayer("unclustered-points", "earthquakes");
         unclustered.setProperties(iconImage("marker-15"));
         mapboxMap.addLayer(unclustered);
 
-        for (int i = 0; i < layers.length; i++) {
-            //Add clusters' circles
-            SymbolLayer clusterSymbols = new SymbolLayer("cluster-" + i, "earthquakes");
-            clusterSymbols.setProperties(
-                    iconImage(images[i]),
-                    iconAllowOverlap(true)
-            );
 
-            Expression pointCount = toNumber(get("point_count"));
+        // Add unique images for each cluster
+        SymbolLayer clusterSymbols = new SymbolLayer("cluster-" + i, "earthquakes");
 
-            // Add a filter to the cluster layer that hides the circles based on "point_count"
-            clusterSymbols.setFilter(
-                    i == 0
-                            ? gte(pointCount, literal(layers[i][0])) :
-                            all(
-                                    gte(pointCount, literal(layers[i][0])),
-                                    lt(pointCount, literal(layers[i - 1][0]))
-                            )
-            );
-            mapboxMap.addLayer(clusterSymbols);
-        }
+        // TODO: Finish this expression
+        clusterSymbols.setProperties(
+                iconImage(Expression.step(get("point_count"), "yellow_rectangle",
+                        stop(0, "blue_star")),
+                        stop(20, "green_circle")),
+                stop(150, "red_polygon")
+                iconAllowOverlap(true);
+        )
 
-        //Add the count labels
+        mapboxMap.addLayer(clusterSymbols);
+
+        //Add the cluster count labels
         SymbolLayer count = new SymbolLayer("count", "earthquakes");
         count.setProperties(
                 textField("{point_count}"),
