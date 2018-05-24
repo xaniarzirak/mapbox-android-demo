@@ -4,13 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -18,7 +16,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
-import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -26,15 +23,11 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.step;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
@@ -170,16 +163,21 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
 
 
         // Add unique images for each cluster
-        SymbolLayer clusterSymbols = new SymbolLayer("cluster-" + i, "earthquakes");
+        SymbolLayer clusterSymbols = new SymbolLayer("clustered-images", "earthquakes");
+
+        // Create stops array
+        Expression.Stop[] stops = new Expression.Stop[]{
+                stop(0, "blue_star"),
+                stop(20, "green_circle"),
+                stop(150, "red_polygon")
+        };
+
+        Expression pointCount = toNumber(get("point_count"));
 
         // TODO: Finish this expression
         clusterSymbols.setProperties(
-                iconImage(Expression.step(get("point_count"), "yellow_rectangle",
-                        stop(0, "blue_star")),
-                        stop(20, "green_circle")),
-                stop(150, "red_polygon")
-                iconAllowOverlap(true);
-        )
+                iconAllowOverlap(true),
+                iconImage(Expression.step(pointCount, literal("yellow-rectangle"), stops)));
 
         mapboxMap.addLayer(clusterSymbols);
 
