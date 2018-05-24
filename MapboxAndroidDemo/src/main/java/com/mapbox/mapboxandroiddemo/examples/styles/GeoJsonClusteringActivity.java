@@ -137,7 +137,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
 
 
         // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
-        // Each point range gets a different fill color.
+        // Each point range gets a different image
 
         Bitmap blue_star = BitmapFactory.decodeResource(
                 GeoJsonClusteringActivity.this.getResources(), R.drawable.star);
@@ -151,6 +151,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         Bitmap yellow_rectangle = BitmapFactory.decodeResource(
                 GeoJsonClusteringActivity.this.getResources(), R.drawable.rectangle);
 
+        // Add image to style's sprite sheet
         mapboxMap.addImage("blue_star", blue_star);
         mapboxMap.addImage("green_circle", green_circle);
         mapboxMap.addImage("red_polygon", red_polygon);
@@ -173,8 +174,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         };
 
         Expression pointCount = toNumber(get("point_count"));
-
-        // TODO: Finish this expression
+        
         clusterSymbols.setProperties(
                 iconAllowOverlap(true),
                 iconImage(Expression.step(pointCount, literal("yellow-rectangle"), stops)));
