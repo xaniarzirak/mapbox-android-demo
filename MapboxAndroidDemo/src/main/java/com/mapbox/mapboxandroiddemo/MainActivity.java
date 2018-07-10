@@ -48,6 +48,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
@@ -55,7 +56,6 @@ import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
@@ -69,13 +69,14 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
@@ -116,7 +117,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
+import com.mapbox.mapboxandroiddemo.labs.HomeScreenWidgetActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
@@ -732,6 +733,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_calendar_integration_description,
           new Intent(MainActivity.this, CalendarIntegrationActivity.class),
           R.string.activity_lab_calendar_integration_url, false, BuildConfig.MIN_SDK_VERSION));
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_lab_home_screen_widget_title,
+          R.string.activity_lab_home_screen_widget_description,
+          new Intent(MainActivity.this, HomeScreenWidgetActivity.class),
+          R.string.activity_lab_home_screen_widget_url, true, BuildConfig.MIN_SDK_VERSION));
         currentCategory = R.id.nav_lab;
         break;
       case R.id.nav_dds:
@@ -807,6 +813,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_info_window_symbol_layer_description,
           new Intent(MainActivity.this, InfoWindowSymbolLayerActivity.class),
           R.string.activity_dds_info_window_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
+
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_time_lapse_rainfall_points_title,
