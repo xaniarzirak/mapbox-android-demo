@@ -43,6 +43,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.AnimatedDashLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
@@ -819,7 +820,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_expression_integration_description,
           new Intent(MainActivity.this, ExpressionIntegrationActivity.class),
           R.string.activity_dds_expression_integration_url, true, BuildConfig.MIN_SDK_VERSION));
-
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_animated_dash_line_title,
+          R.string.activity_dds_animated_dash_line_description,
+          new Intent(MainActivity.this, AnimatedDashLineActivity.class),
+          R.string.activity_dds_animated_dash_line_url, false, BuildConfig.MIN_SDK_VERSION));
         currentCategory = R.id.nav_dds;
         break;
       default:
