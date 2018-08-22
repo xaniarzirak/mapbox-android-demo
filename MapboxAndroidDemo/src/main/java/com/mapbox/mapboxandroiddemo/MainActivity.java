@@ -68,6 +68,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
@@ -635,6 +636,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_java_services_geocoding_description,
           new Intent(MainActivity.this, GeocodingActivity.class),
           R.string.activity_java_services_geocoding_url));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_java_services_tilequery_title,
+          R.string.activity_java_services_tilequery_description,
+          new Intent(MainActivity.this, TilequeryActivity.class),
+          R.string.activity_java_services_tilequery_url));
 
         currentCategory = R.id.nav_java_services;
         break;
