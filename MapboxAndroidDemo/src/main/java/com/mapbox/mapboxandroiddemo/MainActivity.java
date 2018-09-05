@@ -101,6 +101,7 @@ import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.BasicSymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ClickToAddImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -384,6 +385,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_transparent_background_description,
           new Intent(MainActivity.this, TransparentBackgroundActivity.class),
           R.string.activity_styles_transparent_background_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_styles_click_to_add_image_title,
+          R.string.activity_styles_click_to_add_image_description,
+          new Intent(MainActivity.this, ClickToAddImageActivity.class),
+          R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_styles;
         break;
