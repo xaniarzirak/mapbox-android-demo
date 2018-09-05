@@ -3,23 +3,18 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 // #-code-snippet: location-plugin-options-activity full-java
 
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.mapbox.android.core.location.LocationEngine;
-import com.mapbox.android.core.location.LocationEngineListener;
-import com.mapbox.android.core.location.LocationEnginePriority;
-import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -48,13 +43,13 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
  * device location icon.
  */
 public class LocationOptionsActivity extends AppCompatActivity implements
-  OnMapReadyCallback, PermissionsListener, OnLocationLayerClickListener, LocationEngineListener,
-  OnCameraTrackingChangedListener {
+    OnMapReadyCallback, OnLocationLayerClickListener,
+    PermissionsListener, OnCameraTrackingChangedListener {
 
+  private static String TAG = "LocationOptionsActivity";
   private PermissionsManager permissionsManager;
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private LocationEngine locationEngine;
   private LocationLayerPlugin locationLayerPlugin;
   private boolean isInTrackingMode;
 
@@ -80,30 +75,29 @@ public class LocationOptionsActivity extends AppCompatActivity implements
     enableLocationPlugin();
   }
 
-  @SuppressWarnings( {"MissingPermission"})
+  @SuppressWarnings({"MissingPermission"})
   private void enableLocationPlugin() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      // Set up the location engine
-      initializeLocationEngine();
-
       // Create and customize the plugin's options
       LocationLayerOptions locationLayerOptions = LocationLayerOptions.builder(this)
-        .elevation(5)
-        .accuracyAlpha(.6f)
-        .accuracyColor(Color.RED)
-        .foregroundDrawable(R.drawable.android_custom_location_icon)
-        .build();
+          .elevation(5)
+          .accuracyAlpha(.6f)
+          .accuracyColor(Color.RED)
+          .foregroundDrawable(R.drawable.android_custom_location_icon)
+          .build();
 
+      Log.d(TAG, "enableLocationPlugin: made it here 1");
       // Create the plugin
-      locationLayerPlugin = new LocationLayerPlugin(
-        mapView, mapboxMap, locationEngine, locationLayerOptions);
+      locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationLayerOptions);
 
       // Set the plugin's camera and render modes
       locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
       isInTrackingMode = true;
       locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
+
+      Log.d(TAG, "enableLocationPlugin: made it here 2");
 
       // Add the location icon click listener
       locationLayerPlugin.addOnLocationClickListener(this);
@@ -111,14 +105,18 @@ public class LocationOptionsActivity extends AppCompatActivity implements
       // Add the camera tracking listener. Fires if the map camera is manually moved.
       locationLayerPlugin.addOnCameraTrackingChangedListener(this);
 
+      Log.d(TAG, "enableLocationPlugin: made it here 3");
+
       getLifecycle().addObserver(locationLayerPlugin);
 
       setUpClickMeSymbolLayer();
 
-      findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(new View.OnClickListener() {
+      Log.d(TAG, "enableLocationPlugin: made it here 4");
+
+      Button backToTrackingModeButton = findViewById(R.id.back_to_camera_tracking_mode);
+      backToTrackingModeButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
           if (!isInTrackingMode) {
             isInTrackingMode = true;
           } else {
@@ -134,29 +132,13 @@ public class LocationOptionsActivity extends AppCompatActivity implements
   }
 
   @Override
-  @SuppressWarnings( {"MissingPermission"})
+  @SuppressWarnings({"MissingPermission"})
   public void onLocationLayerClick() {
     if (locationLayerPlugin.getLastKnownLocation() != null) {
       Toast.makeText(this, String.format(getString(R.string.current_location),
-        locationLayerPlugin.getLastKnownLocation().getLatitude(),
-        locationLayerPlugin.getLastKnownLocation().getLongitude(), "\ud83d\ude01"), Toast.LENGTH_LONG).show();
-    }
-  }
-
-  @Override
-  @SuppressWarnings( {"MissingPermission"})
-  public void onConnected() {
-    locationEngine.requestLocationUpdates();
-  }
-
-  @Override
-  public void onLocationChanged(Location location) {
-    // Update "tap the icon" SymbolLayer anchor coordinate
-    if (location != null) {
-      GeoJsonSource source = mapboxMap.getSourceAs("source-id");
-      if (source != null) {
-        source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(location.getLatitude(), location.getLongitude())));
-      }
+          locationLayerPlugin.getLastKnownLocation().getLatitude(),
+          locationLayerPlugin.getLastKnownLocation().getLongitude(),
+          "\ud83d\ude01"), Toast.LENGTH_LONG).show();
     }
   }
 
@@ -171,26 +153,19 @@ public class LocationOptionsActivity extends AppCompatActivity implements
     Log.d("LocationOptionsActivity", "onCameraTrackingChanged: ");
   }
 
-  private void initializeLocationEngine() {
-    locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
-    locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
-    locationEngine.setFastestInterval(1000);
-    locationEngine.activate();
-  }
-
-  @SuppressWarnings( {"MissingPermission"})
+  @SuppressWarnings({"MissingPermission"})
   private void setUpClickMeSymbolLayer() {
-    FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
+    FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[]{});
     GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", featureCollection);
     mapboxMap.addSource(geoJsonSource);
     SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
     symbolLayer.setProperties(
-      textSize(17f),
-      textColor(Color.BLUE),
-      textField(getString(R.string.tap_the_icon)),
-      textOffset(new Float[] {0f, -3f}),
-      textIgnorePlacement(true),
-      textAllowOverlap(true)
+        textSize(17f),
+        textColor(Color.BLUE),
+        textField(getString(R.string.tap_the_icon)),
+        textOffset(new Float[]{0f, -3f}),
+        textIgnorePlacement(true),
+        textAllowOverlap(true)
     );
     mapboxMap.addLayer(symbolLayer);
   }
@@ -215,13 +190,10 @@ public class LocationOptionsActivity extends AppCompatActivity implements
     }
   }
 
-  @SuppressWarnings( {"MissingPermission"})
+  @SuppressWarnings({"MissingPermission"})
   protected void onStart() {
     super.onStart();
     mapView.onStart();
-    if (locationEngine != null) {
-      locationEngine.requestLocationUpdates();
-    }
   }
 
   @Override
@@ -240,10 +212,6 @@ public class LocationOptionsActivity extends AppCompatActivity implements
   protected void onStop() {
     super.onStop();
     mapView.onStop();
-    if (locationEngine != null) {
-      locationEngine.removeLocationEngineListener(this);
-      locationEngine.removeLocationUpdates();
-    }
   }
 
   @Override
@@ -256,9 +224,6 @@ public class LocationOptionsActivity extends AppCompatActivity implements
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-    if (locationEngine != null) {
-      locationEngine.deactivate();
-    }
   }
 
   @Override
