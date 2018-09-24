@@ -11,5 +11,8 @@ public class HomeScreenWidgetActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_homescreen_geocoding_widget);
+
+
+    // Visit the DemoAppHomeScreenAddressWidget class to see the internal workings of the widget
   }
 }

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.utils;
 
+// #-code-snippet: homescreen-address-widget-activity full-java
+
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -17,6 +19,7 @@ import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.geocoding.v5.MapboxGeocoding;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
@@ -28,10 +31,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static android.support.constraint.Constraints.TAG;
 
 /**
- * Use the Mapbox Java SDK's (reverse) geocoding to get the device's location and
- * display the address associated with the location, in an Android app widget.
+ * Use the Mapbox Java SDK to make a reverse geocode with the device's current coordiates. Display
+ * the address in an Android home screen widget.
  */
 public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
   LocationEngineListener, PermissionsListener {
@@ -39,7 +43,6 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
   private PermissionsManager permissionsManager;
   private LocationEngine locationEngine;
   private Context context;
-  private String tag = "HomeScreenWidget";
   private int singleWidgetId;
   private Location lastLocation;
   private AppWidgetManager appWidgetManager;
@@ -54,25 +57,20 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
 
   @Override
   public void onEnabled(Context context) {
-    Log.d(tag, "onEnabled: ");
     // Add message/UI here if you'd like
   }
 
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      Log.d(tag, "onPermissionResult: granted");
       initializeLocationEngine(context);
     } else {
-      Log.d(tag, "onPermissionResult: not granted");
       Toast.makeText(context, R.string.user_location_permission_not_granted, Toast.LENGTH_SHORT).show();
     }
   }
 
   private void enableLocationPlugin(Context context) {
-    Log.d(tag, "enableLocationPlugin: starting");
     // Check if permissions are enabled and if not request
-
     try {
       if (PermissionsManager.areLocationPermissionsGranted(context)) {
         Timber.d("enableLocationPlugin: permissions granted");
@@ -93,17 +91,13 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
 
   @SuppressWarnings( {"MissingPermission"})
   private void initializeLocationEngine(Context context) {
-    Log.d(tag, "initializeLocationEngine: ");
     locationEngine = new LocationEngineProvider(context).obtainBestLocationEngineAvailable();
     locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
     locationEngine.addLocationEngineListener(this);
     locationEngine.activate();
     lastLocation = locationEngine.getLastLocation();
     if (lastLocation != null) {
-      Log.d(tag, "initializeLocationEngine: lastLocation != null");
       getReverseGeocodeData(lastLocation, context);
-    } else {
-      Log.d(tag, "initializeLocationEngine: lastLocation == null");
     }
   }
 
@@ -131,24 +125,29 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
     reverseGeocode.enqueueCall(new Callback<GeocodingResponse>() {
       @Override
       public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
-        Log.d(tag, "onResponse: ");
+        try {
+          List<CarmenFeature> carmenFeatureList = response.body().features();
+          // Check that the reverse geocoding response has a place name to display
+          if (carmenFeatureList.size() > 0 && !carmenFeatureList.get(0).placeName().isEmpty()) {
 
-        // Check that the reverse geocoding response has a place name to display
-        if (response.body().features().size() > 0 && !response.body().features().get(0).placeName().isEmpty()) {
+            // Parse through the response to get the place name
+            String placeName = carmenFeatureList.get(0).placeName();
 
-          // Parse through the response to get the place name
-          String placeName = response.body().features().get(0).placeName();
+            // Construct the RemoteViews object
+            RemoteViews views = new RemoteViews(finalContext.getPackageName(), R.layout.demo_app_home_screen_widget);
+            views.setTextViewText(R.id.device_location_textview, placeName);
 
-          // Construct the RemoteViews object
-          RemoteViews views = new RemoteViews(finalContext.getPackageName(), R.layout.demo_app_home_screen_widget);
-          views.setTextViewText(R.id.device_location_textview, placeName);
+            // Instruct the widget manager to update the widget
+            appWidgetManager.updateAppWidget(singleWidgetId, views);
 
-          // Instruct the widget manager to update the widget
-          appWidgetManager.updateAppWidget(singleWidgetId, views);
+          } else {
+            Timber.d("onResponse: no place name");
+          }
 
-        } else {
-          Timber.d("onResponse: no place name");
+        } catch (NullPointerException exception) {
+          Timber.d("onResponse: exception = " + exception);
         }
+
       }
 
       @Override
@@ -186,4 +185,4 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
     Toast.makeText(context, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
   }
 }
-
+// #-end-code-snippet: homescreen-address-widget-activity full-java
