@@ -53,6 +53,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
@@ -461,10 +462,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         );
 
         exampleItemModels.add(new ExampleItemModel(
-           R.string.activity_user_location_map_frag_title,
-           R.string.activity_user_location_map_frag_plugin_description,
-           new Intent(MainActivity.this, LocationPluginFragmentActivity.class),
-           R.string.activity_user_location_fragment_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_user_location_map_frag_title,
+          R.string.activity_user_location_map_frag_plugin_description,
+          new Intent(MainActivity.this, LocationPluginFragmentActivity.class),
+          R.string.activity_user_location_fragment_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
         );
 
         currentCategory = R.id.nav_plugins;
@@ -818,7 +819,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_expression_integration_title,
           R.string.activity_dds_expression_integration_description,
           new Intent(MainActivity.this, ExpressionIntegrationActivity.class),
-          R.string.activity_dds_expression_integration_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_expression_integration_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_satellite_land_select_title,
+          R.string.activity_dds_satellite_land_select_description,
+          new Intent(MainActivity.this, SatelliteLandSelectActivity.class),
+          R.string.activity_dds_satellite_land_select_url, true, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;

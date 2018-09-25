@@ -274,4 +274,8 @@
 
     <!-- Temperature change -->
     <string name="temp_change_feedback"> Showing min and max temperatures up to 2006 in %1$s</string>
+
+    <!-- Satellite land selection -->
+    <string name="clear_all">Clear</string>
+    <string name="trace_instruction">Trace some of the Gardens of Versailles!</string>
 </resources>
